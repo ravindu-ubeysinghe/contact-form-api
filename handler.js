@@ -3,6 +3,7 @@
 const aws = require('aws-sdk')
 const ses = new aws.SES()
 const myEmail = process.env.EMAIL
+const adminEmail = process.env.ADMIN_EMAIL
 const myDomain = process.env.DOMAIN
 
 function generateResponse (code, payload) {
@@ -38,7 +39,7 @@ function generateEmailParams (body) {
 
   return {
     Source: myEmail,
-    Destination: { ToAddresses: [myEmail] },
+    Destination: { ToAddresses: [adminEmail] },
     ReplyToAddresses: [email],
     Message: {
       Body: {
