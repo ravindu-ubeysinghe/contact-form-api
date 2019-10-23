@@ -31,10 +31,9 @@ function generateError (code, err) {
 }
 
 function generateEmailParams (body) {
-  const { email, name, content } = JSON.parse(body);
-  console.log(email, name, content);
-  if (!(email && name && content)) {
-    throw new Error('Missing parameters! Make sure to add parameters \'email\', \'name\', \'content\'.');
+  const { email, name, content, ph } = JSON.parse(body);
+  if (!(email && name && content) || ph) { // ph = hp = honeyPot
+    throw new Error('Something\'s gone wrong at the backend');
   }
 
   return {
@@ -50,7 +49,7 @@ function generateEmailParams (body) {
       },
       Subject: {
         Charset: 'UTF-8',
-        Data: `You received a message from ${myDomain}!`
+        Data: `New Contact Form Enquiry From ${myDomain}!`
       }
     }
   };
